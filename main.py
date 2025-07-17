@@ -19,10 +19,18 @@ def do_request(api_key,subject,n_words):
 def main():
     api_key = input("输入你的阿里百炼 api-key: ")
     subject=input("请输入主题: ")
-    n_words=int(input("请输入字数: "))
+    while(True):
+        try:
+            n_words=int(input("请输入字数: "))
+            break
+        except:
+            print("好歹你输入个数字吧（")
+            continue
     print("AI生成中...")
-    print(do_request(api_key,subject,n_words)['choices'][0]['message']['content'])
-
+    try:
+        print(do_request(api_key,subject,n_words)['choices'][0]['message']['content'])
+    except:
+        print("请求失败，检查你的API-Key")
 
 if __name__ == "__main__":
     main()
